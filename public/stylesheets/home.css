@@ -1,0 +1,32 @@
+.home-header {
+    box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+    z-index: 1010;
+}
+
+.search-container {
+    border-radius: 16px;
+    border: 1px solid black;
+    min-width: 300px;
+}
+
+
+.search-container button {
+    background-color: transparent;
+    border: none;
+}
+
+.search-container button:focus {
+    outline: none;
+}
+
+.search-container input {
+    flex-grow: 1;
+    border: none;
+    background-color: transparent;
+}
+
+.search-container input:focus {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+}

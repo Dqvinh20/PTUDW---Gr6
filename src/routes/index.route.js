@@ -17,4 +17,8 @@ router.get("/teacher/course", function (req, res, next) {
     res.render("teacher/course", { layout: "teacherLayout" });
 });
 
+router.get('/courses', function(req, res, next) {
+  res.render('courses');
+});
+
 export default router;

@@ -1,0 +1,77 @@
+{{#each this.catelogies}}
+    <div class="card">
+        <h4 class="card-header d-flex justify-content-between">
+            {{CatName}}
+            <a class="btn btn-sm btn-outline-danger text-right" href="/admin/categories/add" role="button">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+            Delete Catelogy
+            </a>
+        </h4>
+        
+        <div class="card-body">
+            <h5 class="card-title">
+            Không có dữ liệu!
+            </h5>
+        </div>
+        {{!-- course --}}
+        {{!-- {{#if empty}}
+        <div class="card-body">
+            <h5 class="card-title">
+            Không có dữ liệu!
+            </h5>
+        </div>
+        {{else}}
+        <div class="card-body">
+            <div class="row">
+            
+            {{#each this.products}}
+            <div class="col-sm-4 mb-3">
+                <div class="card h-100">
+                <img class="card-img-top" src="/public/imgs/sp/{{ProID}}/main_thumbs.jpg" alt="{{ProName}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ProName}}</h5>
+                    <h5 class="card-title text-danger">{{format_number Price}}</h5>
+                    <p class="card-text">{{TinyDes}}</p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-sm btn-outline-primary" href="/products/detail/{{ProID}}" role="button">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    Details
+                    </a>
+                    <a class="btn btn-sm btn-outline-success" href="#" role="button">
+                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                    Add to cart
+                    </a>
+                </div>
+                </div>
+            </div>
+            {{/each}}
+            </div>
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    {{#each this.pageNumbers}}
+                        {{#if isCurrent}}
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">{{value}}</span>
+                            </li>
+                        {{else}}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{value}}">{{value}}</a>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        {{/if}} --}}
+        <div class="card-footer text-muted">
+            Footer
+        </div>
+    </div>
+{{/each}}

@@ -233,7 +233,10 @@
   }
   
   .navbar a,
-  .navbar a:focus {
+  .navbar a:focus,
+  .navbar button,
+  .navbar button:focus
+  {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -247,17 +250,20 @@
   }
   
   .navbar a i,
-  .navbar a:focus i {
+  .navbar a:focus i,
+  .navbar button i,
+  .navbar button:focus i {
     font-size: 12px;
     line-height: 0;
     margin-left: 5px;
   }
-  
+
   .navbar a:hover,
   .navbar .active,
   .navbar .active:focus,
   .navbar li:hover>a {
-    color: #13331c;
+    /*color: #13331c;*/
+    color: #3ac162;
   }
   
   .navbar .dropdown ul {
@@ -275,29 +281,35 @@
     transition: 0.3s;
     border-radius: 4px;
   }
-  
+
   .navbar .dropdown ul li {
     min-width: 200px;
   }
   
-  .navbar .dropdown ul a {
+  .navbar .dropdown ul a,
+  .navbar .dropdown ul button
+  {
     padding: 10px 20px;
     font-size: 14px;
     text-transform: none;
     font-weight: 500;
   }
   
-  .navbar .dropdown ul a i {
+  .navbar .dropdown ul a i,
+  .navbar .dropdown ul button i
+  {
     font-size: 12px;
   }
   
   .navbar .dropdown ul a:hover,
+  .navbar .dropdown ul button:hover,
   .navbar .dropdown ul .active:hover,
-  .navbar .dropdown ul li:hover>a {
-    color: #13331c;
+  .navbar .dropdown ul li:hover > a {
+    /*color: #13331c;*/
+    color: #3ac162;
   }
   
-  .navbar .dropdown:hover>ul {
+  .navbar .dropdown:hover > ul {
     opacity: 1;
     top: 100%;
     visibility: visible;

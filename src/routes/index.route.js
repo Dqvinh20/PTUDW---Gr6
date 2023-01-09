@@ -1,7 +1,6 @@
 import express from "express";
-import homeMdw from "../middlewares/locals.mdw.js";
-import categoriesService from "../services/categories.service.js";
 import courseService from "../services/course.service.js";
+import myCoursesService from "../services/my_courses.service.js";
 
 const router = express.Router();
 
@@ -17,6 +16,26 @@ router.get("/", async function (req, res, next) {
                 layout: "adminLayout",
             });
         }
+        let coursesPopular = await courseService.getPopularCoursesInLastWeek();
+        let coursesNewest = await courseService.getNewestCourses();
+        const catPopular = await courseService.getCategoriesPopular();
+
+        coursesPopular = await Promise.all(coursesPopular.map(async (course) => {
+            course.is_watchlist = await myCoursesService.isInMyWatchList(req.user.id, course.id);
+            return course;
+        }));
+
+        coursesNewest = await Promise.all(coursesPopular.map(async (course) => {
+            course.is_watchlist = await myCoursesService.isInMyWatchList(req.user.id, course.id);
+            return course;
+        }));
+
+        console.log(coursesNewest.length);
+        return res.render("home", {
+            coursesPopular,
+            coursesNewest,
+            catPopular
+        });
     }
     const coursesPopular = await courseService.getPopularCoursesInLastWeek();
     const coursesNewest = await courseService.getNewestCourses();
@@ -28,26 +47,5 @@ router.get("/", async function (req, res, next) {
         catPopular
     });
 });
-
-
-
-router.get("/api/Hi", (req, res) => {
-    res.send("HelloWord")
-} )
-
-// router.get("/teacher", function (req, res, next) {
-//     res.render("teacher/index", { layout: "teacherLayout" });
-// });
-//
-// router.get("/teacher/teacher-profile", function (req, res, next) {
-//     res.render("teacher/teacher-profile", { layout: "teacherLayout" });
-// });
-// router.get("/teacher/course", function (req, res, next) {
-//     res.render("teacher/course", { layout: "teacherLayout" });
-// });
-//
-// router.get('/courses', function(req, res, next) {
-//   res.render('courses');
-// });
 
 export default router;

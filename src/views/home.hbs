@@ -1,90 +1,86 @@
-
-
-  
-    <!-- ======= Header ======= -->
-    {{#if auth}}
-    {{else}}
-    
-
+<!-- ======= Header ======= -->
+{{#if auth}}
+{{else}}
     <!-- Hero Section -->
     <section id="hero" class="hero">
-      <div class="info d-flex align-items-center">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2 data-aos="fade-down">
-                Welcome to
-                <span>academyX</span>
-              </h2>
-              <p data-aos="fade-up">
-                The online course website, where you can find out the suitable course.
-                
-                Our online courses are free or pay fee to download and will include topics that may be of interest for you for the future to learn
-                more about. Our main topics covered include.
-              </p>
-              
-            </div>
-          </div>
-        </div>
-    </div>
+        <div class="info d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2 data-aos="fade-down">
+                            Welcome to
+                            <span>academyX</span>
+                        </h2>
+                        <p data-aos="fade-up">
+                            The online course website, where you can find out the suitable course.
 
-    <div
-            id="hero-carousel"
-            class="carousel slide"
-            data-bs-ride="carousel"
-            data-bs-interval="5000"
-    >
+                            Our online courses are free or pay fee to download and will include topics that may be of
+                            interest for you for the future to learn
+                            more about. Our main topics covered include.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div
-                class="carousel-item active"
-                style="
+                id="hero-carousel"
+                class="carousel slide"
+                data-bs-ride="carousel"
+                data-bs-interval="5000"
+        >
+            <div
+                    class="carousel-item active"
+                    style="
             background-image: url(/public/images/hero-carousel-1.jpg);
           "
-        ></div>
-        <div
-                class="carousel-item"
-                style="
+            ></div>
+            <div
+                    class="carousel-item"
+                    style="
             background-image: url(/public/images/hero-carousel-2.jpg);
           "
-        ></div>
-        <div
-                class="carousel-item"
-                style="
+            ></div>
+            <div
+                    class="carousel-item"
+                    style="
             background-image: url(/public/images/hero-carousel-3.jpg);
           "
-        ></div>
-        <div
-                class="carousel-item"
-                style="
+            ></div>
+            <div
+                    class="carousel-item"
+                    style="
             background-image: url(/public/images/hero-carousel-4.jpg);
           "
-        ></div>
+            ></div>
 
-        <a
-                class="carousel-control-prev"
-                href="#hero-carousel"
-                role="button"
-                data-bs-slide="prev"
-        >
+            <a
+                    class="carousel-control-prev"
+                    href="#hero-carousel"
+                    role="button"
+                    data-bs-slide="prev"
+            >
           <span
                   class="carousel-control-prev-icon bi bi-chevron-left"
                   aria-hidden="true"
           ></span>
-        </a>
+            </a>
 
-        <a
-                class="carousel-control-next"
-                href="#hero-carousel"
-                role="button"
-                data-bs-slide="next"
-        >
+            <a
+                    class="carousel-control-next"
+                    href="#hero-carousel"
+                    role="button"
+                    data-bs-slide="next"
+            >
           <span
                   class="carousel-control-next-icon bi bi-chevron-right"
                   aria-hidden="true"
           ></span>
-        </a>
-    </div>
-</section>
-<!-- End Hero Section -->
+            </a>
+        </div>
+    </section>
+    <!-- End Hero Section -->
 {{/if}}
 
 <main id="main" class="pt-4" style="{{#if auth}} margin-top: 80px; {{/if}}">
@@ -111,7 +107,7 @@
                                 necessitatibus optio ad corporis.
                             </p>
                             <div class="text-center">
-                                <a href="about.html" class="more-btn">Learn More
+                                <a href="/" class="more-btn">Learn More
                                     <i class="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
@@ -171,12 +167,13 @@
             </div>
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
                 {{#each catPopular}}
-                <div class="col-lg-3 col-md-4">
-                    <div class="icon-box">
-                        <i class="ri-store-line" style="color: #ffbb2c"></i>
-                        <h3><a href="/categories{{this.slug}}">{{this.cat_name}} &nbsp; &nbsp;<i class="fa-solid fa-user cat"></i>{{this.sum}}</a></h3>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="icon-box">
+                            <i class="ri-store-line" style="color: #ffbb2c"></i>
+                            <h3><a href="/categories{{this.slug}}">{{this.cat_name}} &nbsp; &nbsp;<i
+                                    class="fa-solid fa-user cat"></i>{{this.sum}}</a></h3>
+                        </div>
                     </div>
-                </div>
                 {{/each}}
             </div>
         </div>
@@ -193,43 +190,62 @@
 
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
                 {{#each coursesPopular}}
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="course-item">
-                        <img
-                                src={{this.thumbnail}}
-                                class="img-fluid"
-                                alt="..."
-                        />
-                          <div class="overlay"></div>
-                          <button class="add-to-watchlist">Add to watchlist</button>
-                          <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>{{this.cat_name}}</h4>
-                                {{#if_show this.old_price}}<p class="price-is-sale">{{this.old_price}}</p>{{/if_show}}
-                                <p class="price">{{fCurrency this.price}}</p>
-                            </div>
-
-                            <h3><a href="{{slug}}">{{this.name}}</a></h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>{{this.fullname}}</span>
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="course-item">
+                            <img
+                                    src={{this.thumbnail}}
+                                    class="img-fluid"
+                                    alt="..."
+                            />
+                            <div class="overlay"></div>
+                            {{#if this.is_watchlist}}
+                                <form action="/my-courses/watch-list/remove-watchlist" method="POST">
+                                    <button class="add-to-watchlist" value={{id}} name="id" type="submit"
+                                            class="position-absolute end-0 top-0 me-2 mt-2"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="Remove from watch list">
+                                        Remove from watchlist
+                                    </button>
+                                </form>
+                            {{else}}
+                                <form action="/my-courses/watch-list/add-watchlist" method="POST">
+                                    <button class="add-to-watchlist" value={{id}} name="id" type="submit"
+                                            class="position-absolute end-0 top-0 me-2 mt-2"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="Add to watch list">
+                                        Add to watchlist
+                                    </button>
+                                </form>
+                            {{/if}}
+                            <div class="course-content">
+                                <div
+                                        class="d-flex justify-content-between align-items-center mb-3"
+                                >
+                                    <h4>{{this.cat_name}}</h4>
+                                    {{#if_show this.old_price}}
+                                        <p class="price-is-sale">{{this.old_price}}</p>{{/if_show}}
+                                    <p class="price">{{fCurrency this.price}}</p>
                                 </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;{{fRatings this.avg_rating}}
-                                    <span>({{this.students_rating}}&nbsp;<i class="fa-solid fa-user"></i>)</span>
+
+                                <h3><a href="{{slug}}">{{this.name}}</a></h3>
+
+                                <div
+                                        class="trainer d-flex justify-content-between align-items-center"
+                                >
+                                    <div class="trainer-profile d-flex align-items-center">
+                                        <i class="fa-solid fa-chalkboard-user"></i>
+                                        <span>{{this.fullname}}</span>
+                                    </div>
+                                    <div class="trainer-rank d-flex align-items-center">
+                                        <i class="fa-sharp fa-solid fa-star"></i>&nbsp;{{fRatings this.avg_rating}}
+                                        <span>({{this.students_rating}}&nbsp;<i class="fa-solid fa-user"></i>)</span>
+                                    </div>
+
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
-                </div>
-                    {{/each}}
+                {{/each}}
             </div>
         </div>
     </section>
@@ -244,7 +260,7 @@
             </div>
 
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
-                <{{#each coursesNewest}}
+                {{#each coursesNewest}}
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="course-item">
                         <img
@@ -252,9 +268,27 @@
                                 class="img-fluid"
                                 alt="..."
                         />
-                          <div class="overlay"></div>
-                          <button class="add-to-watchlist">Add to watchlist</button>
-                          <div class="course-content">
+                        <div class="overlay"></div>
+                        {{#if this.is_watchlist}}
+                            <form action="/my-courses/watch-list/remove-watchlist" method="POST">
+                                <button class="add-to-watchlist" value={{id}} name="id" type="submit"
+                                        class="position-absolute end-0 top-0 me-2 mt-2"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="bottom" title="Remove from watch list">
+                                    Remove from watchlist
+                                </button>
+                            </form>
+                        {{else}}
+                            <form action="/my-courses/watch-list/add-watchlist" method="POST">
+                                <button class="add-to-watchlist" value={{id}} name="id" type="submit"
+                                        class="position-absolute end-0 top-0 me-2 mt-2"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="bottom" title="Add to watch list">
+                                    Add to watchlist
+                                </button>
+                            </form>
+                        {{/if}}
+                        <div class="course-content">
                             <div
                                     class="d-flex justify-content-between align-items-center mb-3"
                             >
@@ -276,12 +310,12 @@
                                     <i class="fa-sharp fa-solid fa-star"></i>&nbsp;{{fRatings this.avg_rating}}
                                     <span>({{this.students_rating}}&nbsp;<i class="fa-solid fa-user"></i>)</span>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
-                    {{/each}}
+            {{/each}}
             </div>
         </div>
     </section>

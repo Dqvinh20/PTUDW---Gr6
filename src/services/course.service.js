@@ -22,7 +22,7 @@ export default {
                 thumbnail: course.thumbnail,
                 preview_video: course.preview_video,
                 price: course.price,
-                detailed_description: course.detailed_description,
+                detail_description: course.detailed_description,
                 teacher_id: teacherId,
                 cat_id: course.cat_id,
                 slug: course.slug,
@@ -44,7 +44,10 @@ export default {
             .orderBy("position", "asc");
     },
     async addChapter(id, chapterName, position) {
-        const chapter = await db("chapters").where("name", chapterName);
+        const chapter = await db("chapters").where({
+            name: chapterName,
+            course_id: id,
+        });
         if (chapter.length != 0) {
             return chapter[0];
         }
@@ -81,6 +84,17 @@ export default {
                 video_url: lessonUrl,
                 chapter_id: chapter_id,
                 lesson_position: position,
+            })
+            .returning("*");
+    },
+    updateCourse(id, course) {
+        return db("courses")
+            .where("id", id)
+            .update({
+                name: course.name,
+                brief_description: course.brief_description,
+                detail_description: course.detailed_description,
+                is_complete: course.is_complete,
             })
             .returning("*");
     },

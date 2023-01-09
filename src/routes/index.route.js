@@ -6,18 +6,17 @@ const router = express.Router();
 /* GET home page. */
 router.get("/", function (req, res, next) {
     if (req.session.auth) {
-        if (req.session.passport.user.role === "TEACHER") {
-            return res.render("teacher/teacher-profile", {
-                layout: "teacherLayout",
-            });
+        console.log(req.user.role);
+        if (req.user.role === "TEACHER") {
+            return res.redirect("/teacher/teacher-profile");
         }
     }
     res.render("home");
 });
 
 router.get("/api/Hi", (req, res) => {
-    res.send("HelloWord")
-} )
+    res.send("HelloWord");
+});
 
 // router.get("/teacher", function (req, res, next) {
 //     res.render("teacher/index", { layout: "teacherLayout" });

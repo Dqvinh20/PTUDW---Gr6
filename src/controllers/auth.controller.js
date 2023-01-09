@@ -26,9 +26,9 @@ const getSignupPage = (req, res) => {
 const loginWithPassword = (req, res) => {
     req.session.auth = true;
     if (req.user.role === "TEACHER") {
-        return res.redirect("/teacher");
+        return res.redirect("/teacher/teacher-profile");
     }
-    const url = req.session.retUrl || '/';
+    const url = req.session.retUrl || "/";
     delete req.session.retUrl;
     return res.redirect(url);
 };

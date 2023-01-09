@@ -1,10 +1,10 @@
 import indexRouter from "../routes/index.route.js";
 import authRouter from "../routes/auth.route.js";
-import teacherRoute from "../routes/teacher.route.js";
+// import teacherRoute from "../routes/teacher.route.js";
 import studentRoute from "../routes/student.route.js";
 import myCoursesRoute from "../routes/my_courses.route.js";
 
-import {ensureAuthenticated, ensureStudent, ensureVerifiedEmail, ensureAdmin} from "./ensure.mdw.js";
+import {ensureAuthenticated, ensureStudent, ensureVerifiedEmail} from "./ensure.mdw.js";
 
 export default function (app) {
     app.use("/", indexRouter);

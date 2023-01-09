@@ -22,11 +22,17 @@ export default function (app) {
                 return accum;
             },
             if_eq: function (value1, value2, block) {
-
-                if (value1 === value2){
-                    console.log("true")
+                if (Number(value1) === Number(value2)){
                     return block.fn(this);
                 }
+                else
+                    return block.inverse(this);
+            },
+            addNum: function (value1, value2, block) {
+                return Number(value1) + Number(value2);
+            },
+            subNum: function (value1, value2, block) {
+                return Number(value1) - Number(value2);
             }
         }
     }));

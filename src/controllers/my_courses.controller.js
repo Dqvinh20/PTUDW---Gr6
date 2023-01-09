@@ -3,7 +3,7 @@ import MyCoursesService from "../services/my_courses.service.js";
 const getWatchListPage = async (req, res) => {
     const currentPage = req.params.page || 1;
     const maxCoursePerRow = 4;
-    const maxCoursePerPage = 10;
+    const maxCoursePerPage = 8;
     const offset = (currentPage - 1) * maxCoursePerPage;
     let count = await MyCoursesService.countAllWatchListCourses(req.user.id);
     let courses = await MyCoursesService.getMyWatchList(req.user.id, offset, maxCoursePerPage);
@@ -23,7 +23,7 @@ const getWatchListPage = async (req, res) => {
 const getLearningPage = async (req, res) => {
     const currentPage = req.params.page || 1;
     const maxCoursePerRow = 4;
-    const maxCoursePerPage = 10;
+    const maxCoursePerPage = 8;
     const offset = (currentPage - 1) * maxCoursePerPage;
     let count = await MyCoursesService.countAllLearningCourses(req.user.id);
     let courses = await MyCoursesService.getMyLearningCourse(req.user.id, offset, maxCoursePerPage);

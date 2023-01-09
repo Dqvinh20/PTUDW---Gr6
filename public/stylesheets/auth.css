@@ -29,9 +29,9 @@ html, body {
     color: #3b71ca;
 }
 
-.alert {
-    margin-bottom: 120px;
-    margin-right: 2rem;
-    max-height: 48px;
-    right: -500px;
+.alert-floating {
+    margin-bottom: 120px!important;
+    margin-right: 2rem!important;
+    max-height: 48px!important;
+    right: -500px!important;
 }

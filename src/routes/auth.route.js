@@ -120,14 +120,15 @@ router.get(
 router.get("/email/verify/check", function (req, res) {
     res.send("Wait");
     // res.render("email_verify")
-});
+})
 
-router.get(
-    "/email/verify",
-    passport.authenticate("email_verify", {
-        successReturnToOrRedirect: "/",
-        failureRedirect: "/login",
-    })
-);
+router.get('/email/verify', passport.authenticate('email_verify', {
+    successReturnToOrRedirect: '/',
+    failureRedirect: '/login'
+}));
+
+router.get("/verification", function (req, res) {
+    res.send("Need verify your email")
+})
 
 export default router;

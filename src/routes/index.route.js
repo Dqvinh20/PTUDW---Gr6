@@ -15,6 +15,10 @@ router.get("/", function (req, res, next) {
     res.render("home");
 });
 
+router.get("/api/Hi", (req, res) => {
+    res.send("HelloWord")
+} )
+
 // router.get("/teacher", function (req, res, next) {
 //     res.render("teacher/index", { layout: "teacherLayout" });
 // });

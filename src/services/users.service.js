@@ -26,17 +26,20 @@ const findUserById = async (id) => {
 }
 
 const add = async (user) => {
-    if (user.role == null) {
-        user.role = "STUDENT";
-    }
-
     return db('users').insert(user).returning("*");
 }
 
+const update = async (user) => {
+    const user_id = user.id;
+    delete user.id;
+    return db('users').where('id', user_id).update(user);
+}
+
 export default {
-    add,
     checkLinkedAccount,
     addLinkedAccount,
     findUserByEmail,
-    findUserById
+    findUserById,
+    add,
+    update,
 }

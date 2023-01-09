@@ -19,13 +19,13 @@
                                 class="dropdown"
                                 {{/if}}
                             >
-                                <a href={{this.path}}><span>{{this.title}}</span>
+                                <a href={{this.slug}}><span>{{this.cat_name}}</span>
                                     <i class="bi bi-chevron-right"></i>
                                 </a>
                                 {{#if this.children}}
                                     <ul>
                                         {{#each this.children}}
-                                            <li><a href={{this.path}}>{{this.title}}</a></li>
+                                            <li><a href="{{../slug}}{{this.slug}}">{{this.cat_name}}</a></li>
                                         {{/each}}
                                     </ul>
                                 {{/if}}
@@ -35,7 +35,6 @@
                 </li>
                 <li><a href="#">Contact</a></li>
                 {{#if auth}}
-                    {{#if authUser.photo}}
                         <li class="nav-item dropdown">
                             <a
                                     class="nav-link d-flex align-items-center pe-0"
@@ -45,6 +44,11 @@
                             >
                                 <img src="/public/images/user_avatar.png" width="32" height="32" alt="Avatar"
                                      class="rounded-circle">
+                        {{#if authUser.photo}}
+
+                        {{else}}
+
+                        {{/if}}
                             </a>
 
                             <ul
@@ -112,8 +116,6 @@
                                 </li>
                             </ul>
                         </li>
-                    {{else}}
-                    {{/if}}
                 {{/if}}
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

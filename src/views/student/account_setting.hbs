@@ -28,7 +28,7 @@
                                             type="text"
                                             class="form-control"
                                             id="fullname"
-                                            value='{{authUser.fullname}}'
+                                            value='{{#if result.user}}{{result.user.fullname}}{{else}}{{authUser.fullname}}{{/if}}'
                                             required
                                     />
                                 </div>
@@ -47,7 +47,7 @@
                                             type="email"
                                             class="form-control"
                                             id="email"
-                                            value='{{authUser.email}}'
+                                            value='{{#if result.user}}{{result.user.email}}{{else}}{{authUser.email}}{{/if}}'
                                             required
                                     />
                                 </div>

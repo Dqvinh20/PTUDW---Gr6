@@ -54,7 +54,16 @@ const countAllWatchListCourses = async (studentId) => {
     return result[0].count;
 }
 
+const getLearningCourseById = async (studentId, courseId) => {
+    const result = await db('courses_own')
+        .where("student_id", studentId)
+        .andWhere('course_id', courseId);
+    if (result.length === 0) return null;
+    return result[0];
+}
+
 export default {
+    getLearningCourseById,
     getMyLearningCourse,
     getMyWatchList,
     removeFromWatchList,

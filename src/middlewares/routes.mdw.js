@@ -34,6 +34,9 @@ export default function (app) {
 
     app.use("/admin", adminRoute);
     app.use("/course", courseDetailRoute);
+      app.use("/learning", function (req, res) {
+        res.send("Learning");
+    })
 
     app.use("*", function (req, res) {
         return res.render("errors/404", { layout: "errors" });

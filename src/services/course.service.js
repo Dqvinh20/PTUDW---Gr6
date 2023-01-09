@@ -128,5 +128,5 @@ export default {
 
         return db('users').where('id', teacherId).first();
     }
-
+    
 };

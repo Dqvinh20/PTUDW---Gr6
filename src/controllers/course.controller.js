@@ -8,7 +8,6 @@ const getCourseDetailPage = async(req, res) => {
         return await courseDetailService.getAllChapterInCourse(id);
     } ));
 
-
     // const list = [];
     // list.push(teacher);
 

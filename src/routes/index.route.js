@@ -6,12 +6,9 @@ const router = express.Router();
 /* GET home page. */
 router.get("/", function (req, res, next) {
     if (req.session.auth) {
-        if (req.session.passport.user.role === "TEACHER") {
-            return res.render("teacher/teacher-profile", {
-                layout: "teacherLayout",
-            });
-        }
+      
     }
+   
     res.render("home");
 });
 

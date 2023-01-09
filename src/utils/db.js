@@ -65,6 +65,8 @@ const courses = [
 //     addSampleData();
 //     await udemyApi.getCourseFromUdemy(50).then((courses) => {
 //         return Promise.all(courses.map(async (value) => {
+//             // const slug = value.slug.split('/');
+//             // value.slug = slug[slug.length - 2];
 //             let temp = await db('courses').where('name', value.name);
 //             if (temp.length !== 0) return;
 //             return db('courses').insert(value);

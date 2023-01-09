@@ -1,5 +1,6 @@
 import knexObj from "knex";
-import dotenv from "dotenv";
+import udemyApi from '../utils/udemyApi.js';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -41,10 +42,36 @@ const categories = [
             },
         ],
     },
-];
+]
+
+const courses = [
+    {
+        "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+        "brief_description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+        "thumbnail": "https://img-c.udemycdn.com/course/750x422/567828_67d0.jpg",
+        "slug": "/course/complete-python-bootcamp",
+        "avg_rating": 4.6002073,
+        "students_rating": 447271,
+        "students_learning":1660477,
+        "price": 279000,
+        "old_price": 2199000,
+        "preview_video": "https://mp4-c.udemycdn.com/2018-03-08_20-09-30-1365492dea1831a772c3ed1dd9cf3b66/2/WebHD_720p.mp4?Expires=1672733931&Signature=bZuDOch2uxAivDw8cWG2vpvJpBnApUl28W9tHJ5wtmywG~hkArOMJWFyMpCYQ4PqgwbiEdftUk~fQyRFgVQfs~mN1eA0DQc1hkGMsnXA7S1HqwJLvh5gCD3x3oqSFMC5~xhKE8WzYEKt6BpJUnxjBMqn45SH3vISG94TP9Bgelhl6loQXh3VDPMXj16vZ7c2mekW75NdxZ6LhzmCeAWS~QkhF4wokp49X27OltCs3H-7eFKX-Eys1A4Hz3vhXQ6BOA-ik4q-hRnnU~co61gcUC90NqG0oou~OgXABqrqbzYoadDhl7LP3Db8dagnAs-NohPYJpYYpoki1P3leumEmA__&Key-Pair-Id=APKAITJV77WS5ZT7262A",
+        "cat_id": 1,
+    }
+]
 
 // Chạy lần đầu rồi cmt lại
-// resetDatabase().then(() => addSampleData());
+// resetDatabase().then(async () => {
+//     addSampleData();
+//     await udemyApi.getCourseFromUdemy(50).then((courses) => {
+//         return Promise.all(courses.map(async (value) => {
+//             let temp = await db('courses').where('name', value.name);
+//             if (temp.length !== 0) return;
+//             return db('courses').insert(value);
+//         }));
+//     })
+//     console.log("DONE");
+// });
 
 export async function resetDatabase() {
     await db.schema
@@ -56,14 +83,14 @@ export async function resetDatabase() {
         .dropTableIfExists("lessons")
         .dropTableIfExists("chapters")
         .dropTableIfExists("courses")
-        .dropTableIfExists("categories")
-        .dropTableIfExists("federated_credentials")
-        .dropTableIfExists("users");
+        // .dropTableIfExists("categories")
+        // .dropTableIfExists("federated_credentials")
+        // .dropTableIfExists("users")
 
-    await Promise.all([createUsersTable(), createCategoriesTable()]);
+    // await Promise.all([createUsersTable(), createCategoriesTable()]);
     await createCourseTable();
     await Promise.all([
-        createFederatedCredentialsTable(),
+        // createFederatedCredentialsTable(),
         createRatingTable(),
         createWatchListTable(),
         createCoursesOwnTable(),
@@ -94,7 +121,14 @@ function addSampleData() {
                 insertCategory({ cat_name, slug, parent_cat_id: cat_id });
             });
         }
-    });
+    })
+
+    courses.forEach(async (course) => {
+        const ret = await db('courses').where('name', course.name);
+        if (ret.length !== 0) return;
+        await db('courses').insert(course);
+    })
+
 }
 
 function createFederatedCredentialsTable() {
@@ -134,23 +168,19 @@ function createCourseTable() {
             table.increments().primary();
             table.string("name").notNullable(); // Tên khoá học
             table.string("thumbnail").notNullable(); // Ảnh đại diện (lớn)
-            table.string("brief_description").notNullable(); // Mô tả ngắn gọn nội dung khoá học
-            table.string("detailed_description").notNullable(); // Mô tả chi tiết nội dung khoá học
-            table.string("preview_video").notNullable(); // Video xem trước
-            table
-                .tinyint("avg_rating")
-                .unsigned()
-                .defaultTo(0)
-                .checkBetween([0, 5]); // Điểm đánh giá tb
+            table.specificType("brief_description", 'varchar').notNullable(); // Mô tả ngắn gọn nội dung khoá học
+            table.specificType("detail_description", 'varchar').nullable(); // Mô tả chi tiết nội dung khoá học
+            table.specificType("preview_video", 'varchar').nullable(); // Video xem trước
+            table.double("avg_rating").unsigned().defaultTo(0).checkBetween([0, 5]); // Điểm đánh giá tb
             table.integer("old_price").unsigned().defaultTo(0); // Giá cũ
             table.integer("price").unsigned().defaultTo(0); // Giá hiện hành
             table.boolean("is_complete").defaultTo(false); //  Khoá học đã hoàn thành chưa
 
             table.string("slug").notNullable(); // Đường dẫn khoá học
-            table.integer("students_rating").defaultTo(0).unsigned(); // Số lượng học viên đánh giá
-            table.integer("students_learning").defaultTo(0).unsigned(); // Số lượng học viên đăng ký học
-            table.integer("cat_id").unsigned().notNullable(); // Thông tin lĩnh vực
-            table.integer("teacher_id").unsigned().notNullable(); // Thông tin giảng viên
+            table.integer("students_rating").defaultTo(0).unsigned() // Số lượng học viên đánh giá
+            table.integer("students_learning").defaultTo(0).unsigned() // Số lượng học viên đăng ký học
+            table.integer("cat_id").unsigned().nullable(); // Thông tin lĩnh vực
+            table.integer('teacher_id').unsigned().nullable(); // Thông tin giảng viên
             table.timestamps(true, true); // Trường created_at và updated_at
 
             // Khoá ngoại

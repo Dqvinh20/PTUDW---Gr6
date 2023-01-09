@@ -34,8 +34,8 @@ const loginWithPassword = (req, res) => {
 };
 
 const signUp = async (req, res, next) => {
+    
     req.session.auth = true;
-
     const url = req.session.retUrl || "/";
     delete req.session.retUrl;
     return res.redirect(url);

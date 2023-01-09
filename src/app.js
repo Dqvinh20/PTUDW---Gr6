@@ -10,7 +10,7 @@ import localsMdw from "./middlewares/locals.mdw.js";
 
 dotenv.config();
 const app = express();
-
+// resetDatabase();
 viewMdw(app);
 defaultMdw(app);
 sessionMdw(app);

@@ -11,6 +11,11 @@ router.get("/", function (req, res, next) {
                 layout: "teacherLayout",
             });
         }
+        if (req.session.passport.user.role === "ADMIN") {
+            return res.render("teacher/teacher-profile", {
+                layout: "adminLayout",
+            });
+        }
     }
     res.render("home");
 });

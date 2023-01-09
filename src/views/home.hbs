@@ -2,7 +2,10 @@
 
   <body>
     <!-- ======= Header ======= -->
+    {{#if auth}}
+    {{else}}
     <header id="header" class="fixed-top">
+
       <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="#">academyX</a></h1>
 
@@ -132,7 +135,7 @@
 <!-- End Hero Section -->
 {{/if}}
 
-<main id="main" class="pt-4">
+<main id="main" style="padding-top: 90px!important; ">
     {{#if auth}}
         <div class="container mb-4">
             <h3 class="text-left fw-bold">

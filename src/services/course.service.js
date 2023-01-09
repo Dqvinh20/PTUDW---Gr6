@@ -1,4 +1,6 @@
 import db from "../utils/db.js";
+import knex from "knex";
+
 export default {
     getCourseByTeacherId(id) {
         return db.select("*").table("courses").where("teacher_id", id);
@@ -8,7 +10,6 @@ export default {
     },
     getCourseBySlug(slug) {
         slug = "/course/" + slug + "/";
-        console.log(slug);
         return db.select("*").table("courses").where("slug", slug);
     },
     isAvailable(courseName, teacherId) {
@@ -150,19 +151,23 @@ export default {
         .select(["courses.*", "categories.cat_name", "users.fullname"]);
         if (courses.length === 0) return null;
         
-         return (await courses).reverse().slice(0, 11);
+         return (await courses).reverse().slice(0, 10);
 
     },
     async getMostViewCourses(){
         const courses = await db("courses").select().orderBy("avg_rating").limit(9,1);
-        console.log(courses);
         if (courses.length === 0) return null;
         return courses;
     },
-    async getNewestCourses(){
-        const courses = await db("courses").select().orderBy("created_at").limit(9,1);
-        if (courses.length === 0) return null;
-        return courses;
+    async getCategoriesPopular(){
+        let cat = await db("categories")
+        .join("courses", {"categories.cat_id": "courses.cat_id"})
+        .groupBy("categories.cat_id")
+        .select("categories.*").sum("courses.students_learning");
+        cat = cat.sort((a, b) => Number(a.sum) > Number(b.sum) ? -1 : 1);
+
+    if (cat.length === 0) return null;
+        return cat.slice(0,4);
     }
 
 };

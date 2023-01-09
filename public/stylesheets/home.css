@@ -1932,3 +1932,7 @@ section {
   box-shadow: none;
   transform: translateY(0);
 }
+.cat {
+  color: red;
+  font-size: 20px !important;
+}

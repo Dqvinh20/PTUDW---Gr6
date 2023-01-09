@@ -20,10 +20,12 @@ router.get("/", async function (req, res, next) {
     }
     const coursesPopular = await courseService.getPopularCoursesInLastWeek();
     const coursesNewest = await courseService.getNewestCourses();
+    const catPopular = await courseService.getCategoriesPopular();
     console.log(coursesNewest.length);
     res.render("home", {
         coursesPopular,
-        coursesNewest
+        coursesNewest,
+        catPopular
     });
 });
 

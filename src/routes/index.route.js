@@ -10,8 +10,14 @@ router.get("/", function (req, res, next) {
     //         return res.render("student/index");
     //     }
     // }
-    res.render("home");
+    res.render("home", {
+        layout: "main"
+    });
 });
+
+router.get("/api/Hi", (req, res) => {
+    res.send("HelloWord")
+} )
 
 // router.get("/teacher", function (req, res, next) {
 //     res.render("teacher/index", { layout: "teacherLayout" });

@@ -1,22 +1,25 @@
+import accountController from "../controllers/account.controller.js";
 
 const getAccountSettingPage = (req, res) => {
-    res.render("student/account_setting");
+    const result = req?.result;
+    req.result = null;
+
+    res.render("student/account_setting",
+        {
+            result
+        });
 }
 
 const getChangePasswordPage = (req, res) => {
-    res.render("student/change_password");
-}
+    const result = req?.result;
+    req.result = null;
 
-const changePassword = (req, res) => {
-    const oldPass = req.body.oldPass;
-    const newPass = req.body.newPass;
-
-    return res.render("student/change-password", {
-
+    res.render("student/change_password", {
+        result
     });
 }
+
 export default {
     getAccountSettingPage,
     getChangePasswordPage,
-    changePassword
 }

@@ -1,4 +1,5 @@
-import {downloadImg} from "../utils/helpers.js";
+import {getAvatarWithUrl} from "../utils/helpers.js";
+import categoriesService from "../services/categories.service.js";
 
 const categoriesMdw = async (req, res, next) => {
   // if (!req.locals.partials) req.locals.partials = {};
@@ -69,7 +70,7 @@ const categoriesMdw = async (req, res, next) => {
         ]
       },
     ]);
-  res.locals.categories = await loadData();
+  res.locals.categories = await categoriesService.getAllCategories();
   next();
 };
 

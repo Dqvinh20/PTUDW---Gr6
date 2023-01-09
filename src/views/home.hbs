@@ -60,7 +60,6 @@
 /> }}
 
 {{#if auth}}
-    <div class="" style="margin-top: 5rem;"></div>
 {{else}}
 <!-- Hero Section -->
 <section id="hero" class="hero">
@@ -148,7 +147,7 @@
 <!-- End Hero Section -->
 {{/if}}
 
-<main id="main" class="pt-4">
+<main id="main" class="pt-4" style="{{#if auth}} margin-top: 80px; {{/if}}">
     {{#if auth}}
         <div class="container mb-4">
             <h3 class="text-left fw-bold">

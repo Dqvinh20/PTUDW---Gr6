@@ -2,6 +2,7 @@ import {engine} from "express-handlebars";
 import {dirname, join} from "path";
 import hbs_sections from 'express-handlebars-sections';
 import {fileURLToPath} from "url";
+import * as NumFormat from "../utils/numberFormat.js";
 
 export default function (app) {
     const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -9,9 +10,24 @@ export default function (app) {
     // Set view engine
     app.engine('hbs', engine({
         extname: ".hbs",
-        defaultLayout: "main.layout.hbs",
+        defaultLayout: "main.hbs",
         helpers: {
             section: hbs_sections(),
+            ...NumFormat,
+            forLoop: function (from, to, incr, block) {
+                var accum = '';
+                for(var i = from; i < to; ++i) {
+                    accum += block.fn(i);
+                }
+                return accum;
+            },
+            if_eq: function (value1, value2, block) {
+
+                if (value1 === value2){
+                    console.log("true")
+                    return block.fn(this);
+                }
+            }
         }
     }));
 

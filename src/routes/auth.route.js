@@ -87,4 +87,8 @@ router.get('/email/verify', passport.authenticate('email_verify', {
     failureRedirect: '/login'
 }));
 
+router.get("/verification", function (req, res) {
+    res.send("Need verify your email")
+})
+
 export default router;

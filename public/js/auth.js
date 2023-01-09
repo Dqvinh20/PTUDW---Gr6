@@ -1,15 +1,3 @@
-const alertAnimation = () => {
-    const alert = $('.alert')
-    alert.css('right', alert.width);
-    alert.css('transition', "right 2s");
-    alert.css('right', "0");
-
-    const bsAlert = new bootstrap.Alert('.alert');
-    setTimeout(() => {
-        bsAlert.close();
-    }, 7000)
-}
-
 $(window).ready(e => {
     const showPasswordBtn = $("#show-password");
     const passwordField = $("#password");
@@ -33,6 +21,4 @@ $(window).ready(e => {
             showPasswordBtn.removeClass('d-none');
         }
     });
-
-    alertAnimation();
 })

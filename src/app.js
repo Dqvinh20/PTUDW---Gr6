@@ -7,7 +7,7 @@ import defaultMdw from "./middlewares/default.mdw.js";
 import viewMdw from "./middlewares/view.mdw.js";
 import authMdw from "./middlewares/auth.mdw.js";
 import localsMdw from "./middlewares/locals.mdw.js";
-
+import MailSender from "./utils/mail_sender.js"
 dotenv.config();
 const app = express();
 

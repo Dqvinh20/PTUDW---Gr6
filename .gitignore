@@ -1,2 +1,4 @@
 # Npm library
+.env
 /node_modules
+/__mocks

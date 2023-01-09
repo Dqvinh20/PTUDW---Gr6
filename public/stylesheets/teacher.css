@@ -115,7 +115,22 @@ h6 {
     border: 0;
     box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
 }
-
+.dropdown-menu li {
+    position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+}
 .dropdown-menu .dropdown-header,
 .dropdown-menu .dropdown-footer {
     text-align: center;
@@ -255,7 +270,10 @@ h6 {
     color: #012970;
     font-family: "Poppins", sans-serif;
 }
-
+.card-img-top {
+    height: 380px;
+    /* width: 380px; */
+}
 .card-title span {
     color: #899bbd;
     font-size: 14px;

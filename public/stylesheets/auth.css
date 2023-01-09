@@ -33,5 +33,5 @@ html, body {
     margin-bottom: 120px!important;
     margin-right: 2rem!important;
     max-height: 48px!important;
-    right: -500px!important;
+    right: -500px;
 }

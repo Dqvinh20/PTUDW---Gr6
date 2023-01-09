@@ -10,7 +10,7 @@ import localsMdw from "./middlewares/locals.mdw.js";
 import MailSender from "./utils/mail_sender.js"
 dotenv.config();
 const app = express();
-
+// resetDatabase();
 viewMdw(app);
 defaultMdw(app);
 sessionMdw(app);

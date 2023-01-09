@@ -26,16 +26,17 @@ const getSignupPage = (req, res) => {
 const loginWithPassword = (req, res) => {
     req.session.auth = true;
     if (req.user.role === "TEACHER") {
-        return res.redirect("/teacher");
+        return res.redirect("/teacher/teacher-profile");
+    } else if (req.user.role === "ADMIN") {
+        return res.redirect("/admin/courses?cate=all&teacher=all");
     }
-    const url = req.session.retUrl || '/';
+    const url = req.session.retUrl || "/";
     delete req.session.retUrl;
     return res.redirect(url);
 };
 
 const signUp = async (req, res, next) => {
     req.session.auth = true;
-
     const url = req.session.retUrl || "/";
     delete req.session.retUrl;
     return res.redirect(url);

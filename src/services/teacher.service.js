@@ -3,8 +3,8 @@ export default {
     getTeacherProfile(userId) {
         return db.select("*").table("users").where("id", userId);
     },
-    changeProfile(teacher) {
-        return db("users").update(teacher).where("id", 1);
+    changeProfile(teacher, teacherId) {
+        return db("users").update(teacher).where("id", teacherId);
     },
     getNumberStudent(teacherId) {
         return db

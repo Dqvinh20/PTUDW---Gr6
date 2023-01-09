@@ -147,4 +147,12 @@
 
 {{#section 'js'}}
     <script scr="/public/js/auth.js"></script>
+    <script src="/public/js/alert.js"></script>
+
+    <script>
+        $(window).ready(() => {
+            onLoadPage();
+            alertAnimation();
+        })
+    </script>
 {{/section}}

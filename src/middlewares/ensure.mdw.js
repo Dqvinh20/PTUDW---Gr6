@@ -11,32 +11,28 @@ export function ensureAuthenticated(req, res, next) {
         return next();
     }
 
-    res.set('X-Auth-Required', 'true');
+    res.set("X-Auth-Required", "true");
     req.session.retUrl = req.originalUrl;
-    res.redirect('/login');
+    res.redirect("/login");
 }
 
 export function ensureAdmin(req, res, next) {
-    if (req.user.role === 'ADMIN') {
+    if (req.user.role === "ADMIN") {
         return next();
     }
-    req.user
-    res.redirect('/');
+    req.user;
+    res.redirect("/");
 }
 
+export function ensureTeacher(req, res, next) {
+    if (req.user.role === "TEACHER") {
+        return next();
+    }
+    res.redirect("/");
+}
 export function ensureStudent(req, res, next) {
-    if (req.user.role === 'STUDENT') {
+    if (req.user.role === "STUDENT") {
         return next();
     }
-    return res.render('errors/403', { layout: "errors" });
-}
-
-function ensureTeacher(req, res, next) {
-    if (req.user.role === 'STUDENT') {
-        if (req.user.isVerified !== true) {
-            return res.redirect('/auth/verification');
-        }
-        return next();
-    }
-    res.redirect('/');
+    return res.render("errors/403", { layout: "errors" });
 }

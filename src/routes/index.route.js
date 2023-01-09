@@ -7,12 +7,17 @@ const router = express.Router();
 /* GET home page. */
 router.get("/", function (req, res, next) {
     if (req.session.auth) {
-        if (req.session.passport.user.role === "TEACHER") {
+        console.log(req.user.role);
+        if (req.user.role === "TEACHER") {
+            return res.redirect("/teacher/teacher-profile");
+        }
+        if (req.session.passport.user.role === "ADMIN") {
             return res.render("teacher/teacher-profile", {
-                layout: "teacherLayout",
+                layout: "adminLayout",
             });
         }
     }
+
     const categories = categoriesService.getAllCategories();
     res.render("home");
 });

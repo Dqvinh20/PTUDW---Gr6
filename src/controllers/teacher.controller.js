@@ -1,5 +1,6 @@
 import courseService from "../services/course.service.js";
 import teacherService from "../services/teacher.service.js";
+import accountController from "./account.controller.js";
 import multer from "multer";
 import path from "path";
 const getTeacherProfile = async (req, res, next) => {
@@ -13,13 +14,21 @@ const getTeacherProfile = async (req, res, next) => {
 };
 
 const editTeacherProfile = async (req, res, next) => {
-    const teacher = req.body;
-    await teacherService.changeProfile(teacher);
+    const changeTeacher = req.body;
+    const teacherid = req.user.id;
+
+    if (changeTeacher.oldPass == null) {
+        await teacherService.changeProfile(changeTeacher, teacherid);
+    } else {
+        accountController.changePassword(req, res, next);
+    }
+
     res.redirect("/teacher/teacher-profile");
 };
 const getPageUpdateCourse = async (req, res, next) => {
     const id = req.params.id;
     const course = await courseService.getCourseById(id);
+    console.log(course);
     const chapters = await courseService.getChapterByCourseId(id);
 
     return res.render("teacher/teacher-update-course", {
@@ -90,6 +99,8 @@ const updateCourse = async (req, res, next) => {
             chapter.id,
             course.lesson_position
         );
+        console.log(course);
+        const update = await courseService.updateCourse(id, course);
         if (err instanceof multer.MulterError) {
             console.log(err);
         } else if (err) {
@@ -127,7 +138,8 @@ const addNewCourse = async (req, res, next) => {
         }
         const course = req.body;
         const slug = await courseService.getSlug(course.cat_id);
-        course.slug = slug.slug;
+        course.slug =
+            "/course" + slug.slug + "/" + course.name.replace(/ /g, "");
         const fileName = course.name.replace(/ /g, "");
         course.preview_video = "/public/uploads/" + fileName + ".mp4";
         course.thumbnail = "/public/uploads/" + fileName + ".jpg";

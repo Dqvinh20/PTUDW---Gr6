@@ -1,4 +1,4 @@
-$(window).ready(e => {
+function onLoadPage() {
     const showPasswordBtn = $("#show-password");
     const passwordField = $("#password");
 
@@ -21,4 +21,4 @@ $(window).ready(e => {
             showPasswordBtn.removeClass('d-none');
         }
     });
-})
+}

@@ -138,8 +138,7 @@ const addNewCourse = async (req, res, next) => {
         }
         const course = req.body;
         const slug = await courseService.getSlug(course.cat_id);
-        course.slug =
-            "/course" + slug.slug + "/" + course.name.replace(/ /g, "");
+        course.slug = "/course" + "/" + course.name.replace(/ /g, "") + "/";
         const fileName = course.name.replace(/ /g, "");
         course.preview_video = "/public/uploads/" + fileName + ".mp4";
         course.thumbnail = "/public/uploads/" + fileName + ".jpg";
@@ -148,7 +147,29 @@ const addNewCourse = async (req, res, next) => {
 
     res.redirect("/teacher/course");
 };
+const getCourseSlug = async (req, res) => {
+    console.log(req.params.slug);
+    const courseInfo = await courseService.getCourseBySlug(req.params.slug);
+    console.log(courseInfo);
+    const teacher = await courseService.getTeacherByCourseId(
+        courseInfo[0].teacher_id
+    );
+    console.log(teacher);
+    let chapter = await Promise.all(
+        courseInfo.map(async ({ id }) => {
+            return await courseService.getAllChapterInCourse(id);
+        })
+    );
+
+    res.render("teacher/previewCourse", {
+        layout: "main",
+        courseInfo,
+        chapter: chapter[0],
+        teacher,
+    });
+};
 export default {
+    getCourseSlug,
     getTeacherProfile,
     editTeacherProfile,
     getPageUpdateCourse,

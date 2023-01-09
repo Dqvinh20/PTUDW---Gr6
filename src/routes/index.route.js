@@ -15,23 +15,4 @@ router.get("/", function (req, res, next) {
     });
 });
 
-router.get("/api/Hi", (req, res) => {
-    res.send("HelloWord")
-} )
-
-// router.get("/teacher", function (req, res, next) {
-//     res.render("teacher/index", { layout: "teacherLayout" });
-// });
-//
-// router.get("/teacher/teacher-profile", function (req, res, next) {
-//     res.render("teacher/teacher-profile", { layout: "teacherLayout" });
-// });
-// router.get("/teacher/course", function (req, res, next) {
-//     res.render("teacher/course", { layout: "teacherLayout" });
-// });
-//
-// router.get('/courses', function(req, res, next) {
-//   res.render('courses');
-// });
-
 export default router;

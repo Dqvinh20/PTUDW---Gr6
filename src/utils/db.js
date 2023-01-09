@@ -1,6 +1,7 @@
 import knexObj from "knex";
 import udemyApi from '../utils/udemyApi.js';
 import dotenv from 'dotenv';
+import categoriesService from "../services/categories.service.js";
 
 dotenv.config();
 
@@ -64,9 +65,14 @@ const courses = [
 // resetDatabase().then(async () => {
 //     addSampleData();
 //     await udemyApi.getCourseFromUdemy(50).then((courses) => {
+//         let i = 1;
 //         return Promise.all(courses.map(async (value) => {
 //             let temp = await db('courses').where('name', value.name);
 //             if (temp.length !== 0) return;
+//             value.cat_id = i++;
+//             if (i == 8){
+//                 i = 1;
+//             }
 //             return db('courses').insert(value);
 //         }));
 //     })

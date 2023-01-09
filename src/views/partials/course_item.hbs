@@ -1,0 +1,31 @@
+<div class="course-item">
+    <img
+            src="{{thumbnail}}"
+            class="img-fluid"
+            alt="..."
+    />
+    <div class="course-content">
+        <div
+                class="d-flex justify-content-between align-items-center mb-3"
+        >
+            <h4>{{name}}</h4>
+            <p class="price-is-sale">{{fCurrency oldPrice}}</p>
+            <p class="price">{{fCurrency price}}</p>
+        </div>
+
+        <h3><a href="{{slug}}">{{name}}</a></h3>
+
+        <div
+                class="trainer d-flex justify-content-between align-items-center"
+        >
+            <div class="trainer-profile d-flex align-items-center">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>{{teacher_name}}</span>
+            </div>
+            <div class="trainer-rank d-flex align-items-center">
+                <i class="fa-sharp fa-solid fa-star"></i>&nbsp;{{fRatings avg_rating}}
+                <span>({{fNumber students_learning}}&nbsp;<i class="fa-solid fa-user"></i>)</span>
+            </div>
+        </div>
+    </div>
+</div>

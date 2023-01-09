@@ -1,16 +1,16 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
-import FacebookStrategy from 'passport-facebook';
-import GoogleStrategy from 'passport-google-oauth20';
-import MagicLinkStrategy from 'passport-magic-link';
-import sendgrid from '@sendgrid/mail';
+import FacebookStrategy from "passport-facebook";
+import GoogleStrategy from "passport-google-oauth20";
+import MagicLinkStrategy from "passport-magic-link";
+import sendgrid from "@sendgrid/mail";
 import MailSender from "./mail_sender.js";
 
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 import userService from "../services/users.service.js";
 import UserModel from "../models/user.model.js";
-import {getAvatarByName, getAvatarWithUrl} from '../utils/helpers.js'
+import { getAvatarByName, getAvatarWithUrl } from "../utils/helpers.js";
 import Hash from "../utils/hash.js";
 
 dotenv.config();
@@ -37,71 +37,92 @@ authPassport.use(
                     });
                 }
 
-        if (!Hash.checkPassword(password, user.password)) {
-            return cb(null, false, {message: 'Incorrect username or password.'});
-        }
+                if (!Hash.checkPassword(password, user.password)) {
+                    return cb(null, false, {
+                        message: "Incorrect username or password.",
+                    });
+                }
 
-        user.password = null;
-        return cb(null, user);
-        // return cb(null, false, {message: 'Login success'});
-    } catch (err) {
-        return cb(err);
-    }
-}));
-
-authPassport.use('local-signup', new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'password',
-        passReqToCallback: true
-    },
-    async function verify(req, email, password, cb) {
-        console.log(email, password, req.body.fullname);
-        try {
-            const user = await userService.findUserByEmail(email);
-            if (user) {
-                return cb(null, false, {message: 'Account already exist!!!'});
-                // req.session.messages.push("Account already exists");
-                // return res.redirect("/signup");
+                user.password = null;
+                return cb(null, user);
+                // return cb(null, false, {message: 'Login success'});
+            } catch (err) {
+                return cb(err);
             }
-
-            const newUser = {};
-            newUser.password = Hash.genPassword(password);
-            newUser.email = email;
-            newUser.role = "STUDENT";
-            newUser.fullname = req.body.fullname;
-
-            userService.add(newUser).then(result => {
-                return cb(null, result[0]);
-                // return cb(null, false, "An error was occurred. Retry later!!!")
-            });
-
-        } catch (err) {
-            return cb(null, false, "An error was occurred. Retry later!!!")
         }
-    })
+    )
 );
 
-authPassport.use('email_verify', new MagicLinkStrategy.Strategy({
-    secret: "keyboard cat",
-    userFields: ['email'],
-    tokenField: 'token',
-    verifyUserAfterToken: true,
-}, function send(user, token) {
-    const link = 'http://localhost:5050/email/verify?token=' + token;
-    const msg = {
-        to: user.email,
-        from: process.env['EMAIL'],
-        subject: 'Verify your email',
-        text: 'Hello! Click the link below to finish verifying email of academyX account.\r\n\r\n' + link,
-        html: '<h3>Hello!</h3><p>Click the link below to finish verifying email of academyX account.</p><p><a href="' + link + '">Verify email</a></p>',
-    };
-    return MailSender.sendMail(msg, function (err, info) {
-        if (err) return Promise.resolve(err);
-        console.log(info);
-    });
-}, function verify(user) {
-    return console.log("SEND EMAIL", user)
-}))
+authPassport.use(
+    "local-signup",
+    new LocalStrategy(
+        {
+            usernameField: "email",
+            passwordField: "password",
+            passReqToCallback: true,
+        },
+        async function verify(req, email, password, cb) {
+            console.log(email, password, req.body.fullname);
+            try {
+                const user = await userService.findUserByEmail(email);
+                if (user) {
+                    return cb(null, false, {
+                        message: "Account already exist!!!",
+                    });
+                    // req.session.messages.push("Account already exists");
+                    // return res.redirect("/signup");
+                }
+
+                const newUser = {};
+                newUser.password = Hash.genPassword(password);
+                newUser.email = email;
+                newUser.role = "STUDENT";
+                newUser.fullname = req.body.fullname;
+
+                userService.add(newUser).then((result) => {
+                    return cb(null, result[0]);
+                    // return cb(null, false, "An error was occurred. Retry later!!!")
+                });
+            } catch (err) {
+                return cb(null, false, "An error was occurred. Retry later!!!");
+            }
+        }
+    )
+);
+
+authPassport.use(
+    "email_verify",
+    new MagicLinkStrategy.Strategy(
+        {
+            secret: "keyboard cat",
+            userFields: ["email"],
+            tokenField: "token",
+            verifyUserAfterToken: true,
+        },
+        function send(user, token) {
+            const link = "http://localhost:5050/email/verify?token=" + token;
+            const msg = {
+                to: user.email,
+                from: process.env["EMAIL"],
+                subject: "Verify your email",
+                text:
+                    "Hello! Click the link below to finish verifying email of academyX account.\r\n\r\n" +
+                    link,
+                html:
+                    '<h3>Hello!</h3><p>Click the link below to finish verifying email of academyX account.</p><p><a href="' +
+                    link +
+                    '">Verify email</a></p>',
+            };
+            return MailSender.sendMail(msg, function (err, info) {
+                if (err) return Promise.resolve(err);
+                console.log(info);
+            });
+        },
+        function verify(user) {
+            return console.log("SEND EMAIL", user);
+        }
+    )
+);
 
 /* FACEBOOK */
 authPassport.use(
@@ -295,9 +316,15 @@ authPassport.use(
 authPassport.serializeUser(function (user, cb) {
     process.nextTick(async function () {
         if (user.photo)
-            await getAvatarWithUrl(user.photo, './public/images/user_avatar.png')
+            await getAvatarWithUrl(
+                user.photo,
+                "./public/images/user_avatar.png"
+            );
         else
-            await getAvatarByName(user.fullname, './public/images/user_avatar.png');
+            await getAvatarByName(
+                user.fullname,
+                "./public/images/user_avatar.png"
+            );
         cb(null, {
             id: user.id,
             email: user.email,

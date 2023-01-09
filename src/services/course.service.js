@@ -8,7 +8,7 @@ export default {
     },
     getCourseBySlug(slug) {
         slug = "/course/" + slug + "/";
-        console.log(slug)
+        console.log(slug);
         return db.select("*").table("courses").where("slug", slug);
     },
     isAvailable(courseName, teacherId) {
@@ -27,7 +27,7 @@ export default {
                 thumbnail: course.thumbnail,
                 preview_video: course.preview_video,
                 price: course.price,
-                detailed_description: course.detailed_description,
+                detail_description: course.detailed_description,
                 teacher_id: teacherId,
                 cat_id: course.cat_id,
                 slug: course.slug,
@@ -49,7 +49,10 @@ export default {
             .orderBy("position", "asc");
     },
     async addChapter(id, chapterName, position) {
-        const chapter = await db("chapters").where("name", chapterName);
+        const chapter = await db("chapters").where({
+            name: chapterName,
+            course_id: id,
+        });
         if (chapter.length != 0) {
             return chapter[0];
         }
@@ -89,23 +92,36 @@ export default {
             })
             .returning("*");
     },
+    updateCourse(id, course) {
+        return db("courses")
+            .where("id", id)
+            .update({
+                name: course.name,
+                brief_description: course.brief_description,
+                detail_description: course.detailed_description,
+                is_complete: course.is_complete,
+            })
+            .returning("*");
+    },
     async getAllCourses() {
-        const courses = await db('courses').select();
+        const courses = await db("courses").select();
         if (courses.length === 0) return null;
         return courses;
     },
-    
+
     async add(course) {
-        return db('courses').insert(course);
+        return db("courses").insert(course);
     },
-    async getAllChapterInCourse(courseId) {   
+    async getAllChapterInCourse(courseId) {
         let chapters = await this.getChapterByCourseId(courseId);
         chapters = await Promise.all(
             chapters.map(async (chapter) => {
-                chapter.lessons = await db('lessons').where('chapter_id', chapter.id).orderBy('lesson_position', 'asc');
+                chapter.lessons = await db("lessons")
+                    .where("chapter_id", chapter.id)
+                    .orderBy("lesson_position", "asc");
                 return chapter;
-            } )
-        )
+            })
+        );
         return chapters;
     },
     async getTeacherByCourseId(teacherId) {

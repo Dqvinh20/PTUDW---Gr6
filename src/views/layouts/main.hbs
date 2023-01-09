@@ -34,7 +34,12 @@
 <div id="preloader"></div>
 
 {{> bs4/script}}
-
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 <!-- Vendor JS Files -->
 <script
         src="/public/assets/vendor/purecounter/purecounter_vanilla.js"

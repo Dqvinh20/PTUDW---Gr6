@@ -2,8 +2,10 @@ import accountController from "../controllers/account.controller.js";
 import usersService from "../services/users.service.js";
 const getAccountSettingPage = async (req, res) => {
     const result = req?.result;
-    req.session.passport.user = req.result.user;
-    req.user = req.result.user;
+    if (req?.result?.user) {
+        req.user = req.result.user;
+        req.session.passport.user = req.result.user;
+    }
 
     res.render("student/account_setting", {
         result,

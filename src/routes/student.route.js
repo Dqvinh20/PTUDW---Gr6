@@ -15,4 +15,6 @@ router.post('/change-password',
     accountController.changePassword,
     studentController.getChangePasswordPage);
 
+/* Enroll a course */
+router.post("/enroll-course/", studentController.enrollCourse);
 export default router;

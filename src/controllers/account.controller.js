@@ -1,13 +1,21 @@
 import usersService from "../services/users.service.js";
 import Hash from "../utils/hash.js";
+import passport from "../utils/passport.js";
+import session from "express-session";
 
 async function editAccount(req, res, next) {
     try{
         const { fullname, email } = req.body;
-        await usersService.update({ fullname, email, id: req.user.id });
+        const userId = await usersService.update({ fullname, email, id: req.user.id });
+        const user = await usersService.findUserById(userId);
+        delete user.password;
+        delete user.created_at;
+        delete user.updated_at;
+
         req.result = {
             type: "success",
             msg: "Đổi thông tin thành công",
+            user
         }
         next();
     } catch(error) {

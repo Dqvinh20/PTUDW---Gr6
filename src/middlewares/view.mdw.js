@@ -33,6 +33,13 @@ export default function (app) {
             },
             subNum: function (value1, value2, block) {
                 return Number(value1) - Number(value2);
+            },
+            if_show: function (value1, block){
+                if (Number(value1) != 0){
+                    return block.fn(this);
+                } else{
+                    return block.inverse(this);
+                }
             }
         }
     }));

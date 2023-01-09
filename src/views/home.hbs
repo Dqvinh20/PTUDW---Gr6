@@ -304,14 +304,15 @@
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Courses</h2>
-                <p>Popular Courses In Last Week</p>
+                <p>Most popular Courses In Last Week&nbsp;<i class="fa-solid fa-fire"></i></p>
             </div>
 
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                {{#each coursesPopular}}
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="course-item">
                         <img
-                                src="/public/images/course-1.jpg"
+                                src={{this.thumbnail}}
                                 class="img-fluid"
                                 alt="..."
                         />
@@ -321,137 +322,30 @@
                             <div
                                     class="d-flex justify-content-between align-items-center mb-3"
                             >
-                                <h4>Web Development</h4>
-                                <p class="price-is-sale">$169</p>
-                                <p class="price">$150</p>
+                                <h4>{{this.cat_name}}</h4>
+                                {{#if_show this.old_price}}<p class="price-is-sale">{{this.old_price}}</p>{{/if_show}}
+                                <p class="price">{{fCurrency this.price}}</p>
                             </div>
 
-                            <h3><a href="course-details.html">Website Design</a></h3>
+                            <h3><a href="course-details.html">{{this.name}}</a></h3>
 
                             <div
                                     class="trainer d-flex justify-content-between align-items-center"
                             >
                                 <div class="trainer-profile d-flex align-items-center">
                                     <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
+                                    <span>{{this.fullname}}</span>
                                 </div>
                                 <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
+                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;{{fRatings this.avg_rating}}
+                                    <span>({{this.students_rating}}&nbsp;<i class="fa-solid fa-user"></i>)</span>
                                 </div>
                                 
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End Course Item-->
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-1.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Web Development</h4>
-                                <p class="price">$169</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Website Design</a></h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
-
-                <div
-                        class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
-                >
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-2.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Marketing</h4>
-                                <p class="price">$250</p>
-                            </div>
-
-                            <h3>
-                                <a href="course-details.html">Search Engine Optimization</a>
-                            </h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
-
-                <div
-                        class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
-                >
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-3.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Content</h4>
-                                <p class="price">$180</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Copywriting</a></h3>
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
+                    {{/each}}
             </div>
         </div>
     </section>
@@ -466,353 +360,44 @@
             </div>
 
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                <{{#each coursesNewest}}
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="course-item">
                         <img
-                                src="/public/images/course-1.jpg"
+                                src={{this.thumbnail}}
                                 class="img-fluid"
                                 alt="..."
                         />
-                        <div class="course-content">
+                          <div class="overlay"></div>
+                          <button class="add-to-watchlist">Add to watchlist</button>
+                          <div class="course-content">
                             <div
                                     class="d-flex justify-content-between align-items-center mb-3"
                             >
-                                <h4>Web Development</h4>
-                                <p class="price">$169</p>
+                                <h4>{{this.cat_name}}</h4>
+                                {{#if_show this.old_price}}<p class="price-is-sale">{{this.old_price}}</p>{{/if_show}}
+                                <p class="price">{{fCurrency this.price}}</p>
                             </div>
 
-                            <h3><a href="course-details.html">Website Design</a></h3>
+                            <h3><a href="course-details.html">{{this.name}}</a></h3>
 
                             <div
                                     class="trainer d-flex justify-content-between align-items-center"
                             >
                                 <div class="trainer-profile d-flex align-items-center">
                                     <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
+                                    <span>{{this.fullname}}</span>
                                 </div>
                                 <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
+                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;{{fRatings this.avg_rating}}
+                                    <span>({{this.students_rating}}&nbsp;<i class="fa-solid fa-user"></i>)</span>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End Course Item-->
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-1.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Web Development</h4>
-                                <p class="price">$169</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Website Design</a></h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
-
-                <div
-                        class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
-                >
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-2.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Marketing</h4>
-                                <p class="price">$250</p>
-                            </div>
-
-                            <h3>
-                                <a href="course-details.html">Search Engine Optimization</a>
-                            </h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
-
-                <div
-                        class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
-                >
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-3.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Content</h4>
-                                <p class="price">$180</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Copywriting</a></h3>
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-1.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Web Development</h4>
-                                <p class="price">$169</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Website Design</a></h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-1.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Web Development</h4>
-                                <p class="price">$169</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Website Design</a></h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
-
-                <div
-                        class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
-                >
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-2.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Marketing</h4>
-                                <p class="price">$250</p>
-                            </div>
-
-                            <h3>
-                                <a href="course-details.html">Search Engine Optimization</a>
-                            </h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
-
-                <div
-                        class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
-                >
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-3.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Content</h4>
-                                <p class="price">$180</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Copywriting</a></h3>
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-1.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Web Development</h4>
-                                <p class="price">$169</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Website Design</a></h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="course-item">
-                        <img
-                                src="/public/images/course-1.jpg"
-                                class="img-fluid"
-                                alt="..."
-                        />
-                        <div class="course-content">
-                            <div
-                                    class="d-flex justify-content-between align-items-center mb-3"
-                            >
-                                <h4>Web Development</h4>
-                                <p class="price">$169</p>
-                            </div>
-
-                            <h3><a href="course-details.html">Website Design</a></h3>
-
-                            <div
-                                    class="trainer d-flex justify-content-between align-items-center"
-                            >
-                                <div class="trainer-profile d-flex align-items-center">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Antonio</span>
-                                </div>
-                                <div class="trainer-rank d-flex align-items-center">
-                                    <i class="fa-sharp fa-solid fa-star"></i>&nbsp;4.5
-                                    <span>(65&nbsp;<i class="fa-solid fa-user"></i>)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Course Item-->
+                    {{/each}}
             </div>
         </div>
     </section>

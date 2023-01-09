@@ -124,4 +124,40 @@ export default {
         );
         return chapters;
     },
+    async getPopularCoursesInLastWeek(){
+        const courses = db("courses")
+        .join("categories", {"categories.cat_id": "courses.cat_id"})
+        .join("users", {"courses.teacher_id" : "users.id"})
+        .where("users.role", "TEACHER")
+        .orderBy("avg_rating")
+        .select(["courses.*", "categories.cat_name", "users.fullname"]);
+        if (courses.length === 0) return null;
+        
+         return (await courses).reverse().slice(0, 4);
+
+    },
+    async getNewestCourses(){
+        const courses = db("courses")
+        .join("categories", {"categories.cat_id": "courses.cat_id"})
+        .join("users", {"courses.teacher_id" : "users.id"})
+        .where("users.role", "TEACHER")
+        .orderBy("created_at")
+        .select(["courses.*", "categories.cat_name", "users.fullname"]);
+        if (courses.length === 0) return null;
+        
+         return (await courses).reverse().slice(0, 11);
+
+    },
+    async getMostViewCourses(){
+        const courses = await db("courses").select().orderBy("avg_rating").limit(9,1);
+        console.log(courses);
+        if (courses.length === 0) return null;
+        return courses;
+    },
+    async getNewestCourses(){
+        const courses = await db("courses").select().orderBy("created_at").limit(9,1);
+        if (courses.length === 0) return null;
+        return courses;
+    }
+
 };

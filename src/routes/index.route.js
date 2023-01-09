@@ -1,11 +1,12 @@
 import express from "express";
 import homeMdw from "../middlewares/locals.mdw.js";
 import categoriesService from "../services/categories.service.js";
+import courseService from "../services/course.service.js";
 
 const router = express.Router();
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", async function (req, res, next) {
     if (req.session.auth) {
         console.log(req.user.role);
         if (req.user.role === "TEACHER") {
@@ -17,9 +18,13 @@ router.get("/", function (req, res, next) {
             });
         }
     }
-
-    const categories = categoriesService.getAllCategories();
-    res.render("home");
+    const coursesPopular = await courseService.getPopularCoursesInLastWeek();
+    const coursesNewest = await courseService.getNewestCourses();
+    console.log(coursesNewest.length);
+    res.render("home", {
+        coursesPopular,
+        coursesNewest
+    });
 });
 
 

@@ -32,7 +32,11 @@ const add = async (user) => {
 const update = async (user) => {
     const user_id = user.id;
     delete user.id;
-    return db('users').where('id', user_id).update(user);
+    return await db('users').where('id', user_id).update(user);
+}
+
+const enrollCourse = async (userId, courseId) => {
+    return await db('courses_own').insert({ 'student_id' : userId, 'course_id': courseId});
 }
 
 export default {
@@ -42,4 +46,5 @@ export default {
     findUserById,
     add,
     update,
+    enrollCourse
 }

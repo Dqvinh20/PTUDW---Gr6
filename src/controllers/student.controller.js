@@ -1,12 +1,13 @@
 import accountController from "../controllers/account.controller.js";
-
-const getAccountSettingPage = (req, res) => {
+import usersService from "../services/users.service.js";
+const getAccountSettingPage = async (req, res) => {
     const result = req?.result;
-    req.result = null;
+    req.session.passport.user = req.result.user;
+    req.user = req.result.user;
 
     res.render("student/account_setting",
         {
-            result
+            result,
         });
 }
 
@@ -19,7 +20,16 @@ const getChangePasswordPage = (req, res) => {
     });
 }
 
+const enrollCourse = async (req, res) => {
+    const userId = req.user.id;
+    const courseId = req.body.id;
+    await usersService.enrollCourse(userId, courseId);
+
+    return res.redirect(req.headers.referer || req.headers.referer);
+}
+
 export default {
     getAccountSettingPage,
     getChangePasswordPage,
+    enrollCourse,
 }

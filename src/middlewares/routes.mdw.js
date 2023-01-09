@@ -19,7 +19,7 @@ export default function (app) {
 
     app.all("/student*", ensureAuthenticated);
     app.all("/student*", ensureStudent);
-    app.all("/student*", ensureVerifiedEmail);
+    // app.all("/student*", ensureVerifiedEmail);
     app.use("/student", studentRoute);
 
     // app.all("/my-courses*", ensureAuthenticated);

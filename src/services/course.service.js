@@ -127,7 +127,7 @@ export default {
     async getTeacherByCourseId(teacherId) {
 
         return db('users').where('id', teacherId).first();
-    }
+    },
     
     async getPopularCoursesInLastWeek(){
         const courses = db("courses")

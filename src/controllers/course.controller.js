@@ -14,6 +14,13 @@ const getCourseDetailPage = async(req, res) => {
     });
 };
 
+const getAllCoursesByCategories =  async (id) => {
+    const courses = await db('courses').where('cat_id', id);
+    if (courses.length === 0) return null;
+    return courses;
+}
+
 export default {
+    getAllCoursesByCategories,
     getCourseDetailPage,
 };

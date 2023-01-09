@@ -87,7 +87,7 @@ authPassport.use(
                 return cb(null, false, "An error was occurred. Retry later!!!");
             }
         }
-    })
+    )
 );
 
 authPassport.use(

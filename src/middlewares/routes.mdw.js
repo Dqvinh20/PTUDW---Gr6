@@ -3,7 +3,8 @@ import authRouter from "../routes/auth.route.js";
 import teacherRoute from "../routes/teacher.route.js";
 import adminRoute from "../routes/admin.route.js";
 import studentRoute from "../routes/student.route.js";
-// import myCoursesRoute from "../routes/my_courses.route.js";
+import myCoursesRoute from "../routes/my_courses.route.js";
+import courseDetailRoute from "../routes/course.route.js";
 
 import {
     ensureAuthenticated,
@@ -32,6 +33,7 @@ export default function (app) {
     app.use("/teacher", teacherRoute);
 
     app.use("/admin", adminRoute);
+    app.use("/course", courseDetailRoute);
 
     app.use("*", function (req, res) {
         return res.render("errors/404", { layout: "errors" });

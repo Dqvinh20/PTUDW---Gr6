@@ -6,6 +6,11 @@ export default {
     getCourseById(id) {
         return db.select("*").table("courses").where("id", id);
     },
+    getCourseBySlug(slug) {
+        slug = "/course/" + slug + "/";
+        console.log(slug);
+        return db.select("*").table("courses").where("slug", slug);
+    },
     isAvailable(courseName, teacherId) {
         return db
             .select("*")
@@ -97,5 +102,26 @@ export default {
                 is_complete: course.is_complete,
             })
             .returning("*");
+    },
+    async getAllCourses() {
+        const courses = await db("courses").select();
+        if (courses.length === 0) return null;
+        return courses;
+    },
+
+    async add(course) {
+        return db("courses").insert(course);
+    },
+    async getAllChapterInCourse(courseId) {
+        let chapters = await this.getChapterByCourseId(courseId);
+        chapters = await Promise.all(
+            chapters.map(async (chapter) => {
+                chapter.lessons = await db("lessons")
+                    .where("chapter_id", chapter.id)
+                    .orderBy("lesson_position", "asc");
+                return chapter;
+            })
+        );
+        return chapters;
     },
 };

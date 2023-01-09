@@ -22,9 +22,9 @@ export default function (app) {
     // app.all("/student*", ensureVerifiedEmail);
     app.use("/student", studentRoute);
 
-    // app.all("/my-courses*", ensureAuthenticated);
-    // app.all("/my-courses*", ensureStudent);
-    // app.use("/my-courses", myCoursesRoute)
+    app.all("/my-courses*", ensureAuthenticated);
+    app.all("/my-courses*", ensureStudent);
+    app.use("/my-courses", myCoursesRoute);
 
     // app.use("/profile*", ensureAuthenticated);
     // /* Teacher route */

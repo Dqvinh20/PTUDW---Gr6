@@ -10,6 +10,11 @@ router.get("/", function (req, res, next) {
         if (req.user.role === "TEACHER") {
             return res.redirect("/teacher/teacher-profile");
         }
+        if (req.session.passport.user.role === "ADMIN") {
+            return res.render("teacher/teacher-profile", {
+                layout: "adminLayout",
+            });
+        }
     }
     res.render("home");
 });

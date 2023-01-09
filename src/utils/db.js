@@ -86,15 +86,15 @@ export async function resetDatabase() {
         .dropTableIfExists("study_progress")
         .dropTableIfExists("lessons")
         .dropTableIfExists("chapters")
-        .dropTableIfExists("courses")
-        .dropTableIfExists("categories")
-        .dropTableIfExists("federated_credentials")
-        .dropTableIfExists("users");
+        .dropTableIfExists("courses");
+    // .dropTableIfExists("categories")
+    // .dropTableIfExists("federated_credentials")
+    // .dropTableIfExists("users")
 
-    await Promise.all([createUsersTable(), createCategoriesTable()]);
+    // await Promise.all([createUsersTable(), createCategoriesTable()]);
     await createCourseTable();
     await Promise.all([
-        createFederatedCredentialsTable(),
+        // createFederatedCredentialsTable(),
         createRatingTable(),
         createWatchListTable(),
         createCoursesOwnTable(),

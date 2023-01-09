@@ -1,6 +1,7 @@
 import indexRouter from "../routes/index.route.js";
 import authRouter from "../routes/auth.route.js";
 import teacherRoute from "../routes/teacher.route.js";
+import adminRoute from "../routes/admin.route.js";
 import studentRoute from "../routes/student.route.js";
 // import myCoursesRoute from "../routes/my_courses.route.js";
 
@@ -29,6 +30,8 @@ export default function (app) {
     app.all("/teacher*", ensureAuthenticated);
     app.all("/teacher*", ensureTeacher);
     app.use("/teacher", teacherRoute);
+
+    app.use("/admin", adminRoute);
 
     app.use("*", function (req, res) {
         return res.render("errors/404", { layout: "errors" });

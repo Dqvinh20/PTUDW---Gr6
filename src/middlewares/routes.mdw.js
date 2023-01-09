@@ -5,6 +5,7 @@ import adminRoute from "../routes/admin.route.js";
 import studentRoute from "../routes/student.route.js";
 import myCoursesRoute from "../routes/my_courses.route.js";
 import courseDetailRoute from "../routes/course.route.js";
+import categoryDetailRoute  from "../routes/category.route.js";
 
 import {
     ensureAuthenticated,
@@ -34,6 +35,7 @@ export default function (app) {
 
     app.use("/admin", adminRoute);
     app.use("/course", courseDetailRoute);
+    app.use("/categories", categoryDetailRoute);
       app.use("/learning", function (req, res) {
         res.send("Learning");
     })

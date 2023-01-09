@@ -78,7 +78,7 @@ authPassport.use('local-signup', new LocalStrategy({
         } catch (err) {
             return cb(null, false, "An error was occurred. Retry later!!!")
         }
-    )
+    })
 );
 
 authPassport.use('email_verify', new MagicLinkStrategy.Strategy({

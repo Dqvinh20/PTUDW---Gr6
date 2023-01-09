@@ -1,5 +1,6 @@
 import express from "express";
 import homeMdw from "../middlewares/locals.mdw.js";
+import categoriesService from "../services/categories.service.js";
 
 const router = express.Router();
 
@@ -12,8 +13,11 @@ router.get("/", function (req, res, next) {
             });
         }
     }
+    const categories = categoriesService.getAllCategories();
     res.render("home");
 });
+
+
 
 router.get("/api/Hi", (req, res) => {
     res.send("HelloWord")

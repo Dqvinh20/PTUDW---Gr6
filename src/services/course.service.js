@@ -108,5 +108,9 @@ export default {
         )
         return chapters;
     },
+    async getTeacherByCourseId(teacherId) {
+
+        return db('users').where('id', teacherId).first();
+    }
 
 };

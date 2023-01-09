@@ -138,7 +138,8 @@ const addNewCourse = async (req, res, next) => {
         }
         const course = req.body;
         const slug = await courseService.getSlug(course.cat_id);
-        course.slug = "/course/" + slug.slug;
+        course.slug =
+            "/course" + slug.slug + "/" + course.name.replace(/ /g, "");
         const fileName = course.name.replace(/ /g, "");
         course.preview_video = "/public/uploads/" + fileName + ".mp4";
         course.thumbnail = "/public/uploads/" + fileName + ".jpg";

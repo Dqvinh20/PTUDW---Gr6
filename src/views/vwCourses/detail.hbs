@@ -1,6 +1,7 @@
 {{#section 'css'}}
     <link rel="stylesheet" href="/public/stylesheets/courseDetail.css">
 {{/section}}
+ {{#each courseInfo}}
 <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
         <h2>{{name}}</h2>
@@ -11,7 +12,7 @@
     <!-- ======= Cource Details Section ======= -->
 <section id="course-details" class="course-details">
     <div class="container" data-aos="fade-up">
-        {{#each courseInfo}}
+       
         <div class="row">
             <div class="col-lg-8">
             {{!-- <h3>Et enim incidunt fuga tempora</h3> --}}

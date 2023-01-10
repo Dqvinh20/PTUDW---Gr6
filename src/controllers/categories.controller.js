@@ -5,7 +5,7 @@ const getCourses = async(req, res) => {
     let name = req.params.slug;
     name = name.replace("-", " ");
     let courses = await categoriesService.getCoursesByCatId(req.params.slug);
-    if (courses) {
+    if (courses && req.session.auth) {
         courses = await Promise.all(courses.map(async (course) => {
             course.is_watchlist = await myCoursesService.isInMyWatchList(req.user.id, course.id);
             return course;

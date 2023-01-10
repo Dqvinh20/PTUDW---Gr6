@@ -71,6 +71,7 @@ const courses = [
 //             let temp = await db('courses').where('name', value.name);
 //             if (temp.length !== 0) return;
 //             value.cat_id = i++;
+//             value.teacher_id = 2;
 //             if (i == 8){
 //                 i = 1;
 //             }
@@ -172,7 +173,7 @@ function createCourseTable() {
         .withSchema("public")
         .createTable("courses", function (table) {
             table.increments().primary();
-            table.string("name").notNullable(); // Tên khoá học
+            table.string("name").notNullable().index("Search Name"); // Tên khoá học
             table.string("thumbnail").notNullable(); // Ảnh đại diện (lớn)
             table.specificType("brief_description", "varchar").notNullable(); // Mô tả ngắn gọn nội dung khoá học
             table.specificType("detail_description", "varchar").nullable(); // Mô tả chi tiết nội dung khoá học
@@ -196,6 +197,8 @@ function createCourseTable() {
             // Khoá ngoại
             table.foreign("cat_id").references("cat_id").inTable("categories");
             table.foreign("teacher_id").references("id").inTable("users");
+
+            // table.index('name', "Search Name", 'gin');
         });
 }
 

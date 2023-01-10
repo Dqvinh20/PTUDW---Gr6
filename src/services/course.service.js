@@ -168,6 +168,17 @@ export default {
 
     if (cat.length === 0) return null;
         return cat.slice(0,4);
-    }
-
+    },
+    async fullTextSearchCourse(keyword, limit){
+        if (!limit) limit = 100;
+        const courses = await db.raw(
+            "SELECT courses.*, categories.cat_name, users.fullname " +
+            "FROM courses JOIN categories ON categories.cat_id = courses.cat_id " +
+            "JOIN users ON users.id = courses.teacher_id " +
+            `WHERE to_tsvector('english', courses.name) @@ plainto_tsquery('${keyword}') ` +
+            `LIMIT ${limit};`
+        )
+        if (courses.rowCount === 0) return null;
+        return courses.rows;
+    },
 };

@@ -1,7 +1,6 @@
 import express from "express";
 import courseService from "../services/course.service.js";
 import myCoursesService from "../services/my_courses.service.js";
-import MyCoursesService from "../services/my_courses.service.js";
 
 const router = express.Router();
 
@@ -52,15 +51,6 @@ router.get("/", async function (req, res, next) {
 router.get("/search", async (req, res) => {
     const keyword = req.query.keyword;
     return res.redirect(`/search/pages?keyword=${keyword}&page=1`);
-
-    // const courses = await courseService.fullTextSearchCourse(keyword, 10);
-    // return res.render(
-    //     "search_result",
-    //     {
-    //         layout: "main",
-    //         courses
-    //     }
-    // )
 })
 router.get("/search/pages", async (req, res) => {
     const keyword = req.query.keyword;
